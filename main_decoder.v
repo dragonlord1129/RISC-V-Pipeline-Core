@@ -1,6 +1,6 @@
 module main_decoder (
     input [6:0] opcode,
-    output RegWrite, MemWrite, ResultSrc, ALUSrc, branch,
+    output RegWrite, MemWrite, ResultSrc, ALUSrc, Branch,
     output [1:0] ImmSrc, ALUOp
 );
     parameter lw = 7'b0000011;
@@ -14,7 +14,7 @@ module main_decoder (
     assign MemWrite = (opcode == sw) ? 1'b1 : 1'b0;
     assign ResultSrc = (opcode == lw) ? 1'b1 : 1'b0;
     assign ALUSrc = ((opcode == lw) | (opcode == sw)) ? 1'b1 : 1'b0;
-    assign branch = (opcode == beq) ? 1'b1 : 1'b0;
+    assign Branch = (opcode == beq) ? 1'b1 : 1'b0;
 
     assign ImmSrc = (opcode == sw) ? 2'b01 :
                     (opcode == beq) ? 2'b10 : 2'b00;

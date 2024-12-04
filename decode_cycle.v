@@ -6,6 +6,7 @@ module decode_cycle (clk, rst,  InstrD, PCD, PCPlus4D, RegWriteW, RDW, ResultW, 
     input clk, rst;
     input [4:0] RDW;
     input [31:0] InstrD, PCD, PCPlus4D, ResultW;
+    input RegWriteW;
 
     output RegWriteE,ALUSrcE,MemWriteE,ResultSrcE,BranchE;
     output [2:0] ALUControlE;
@@ -104,7 +105,4 @@ module decode_cycle (clk, rst,  InstrD, PCD, PCPlus4D, RegWriteW, RDW, ResultW, 
     assign PCPlus4E = PCPlus4D_R;
     assign RS1_E = RS1_D_R;
     assign RS2_E = RS2_D_R;
-
-
-
 endmodule //decode_cycle
