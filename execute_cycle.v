@@ -12,7 +12,7 @@ module execute_cycle(
     output [31:0] ALUResultM, WriteDataM, PCTargetE, PCPlus4M,
     output [4:0] RD_M,
     output RegWriteM, MemWriteM, PCSrcE,
-    output ResultSrcM
+    output  ResultSrcM
 );
 
     // Intermediate registers
