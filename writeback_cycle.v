@@ -1,12 +1,13 @@
 `include "mux.v"
-module writeback_cycle (clk, rst, RegWriteW, ResultSrcW, ALU_ResultW, ReadDataW, RD_W,
+module writeback_cycle (clk, rst, RegWriteW, ResultSrcW, ALUResultW, ReadDataW, RD_W, RD_W_W,
 ResultW, RegWriteW_W);
     input clk, rst, RegWriteW, ResultSrcW;
     input [4:0] RD_W;
-    input [31:0] ALU_ResultW, ReadDataW;
+    input [31:0] ALUResultW, ReadDataW;
 
     output [31:0] ResultW; 
     output RegWriteW_W;
+    output [4:0] RD_W_W;
 
     reg [4:0] RD_W_R;
     reg RegWriteW_R;
@@ -15,7 +16,7 @@ ResultW, RegWriteW_W);
     wire [31:0] ResultW_X;
     
     mux mux(
-        .a(ALU_ResultW),
+        .a(ALUResultW),
         .b(ReadDataW),
         .s(ResultSrcW),
         .c(ResultW_X)
@@ -34,7 +35,7 @@ ResultW, RegWriteW_W);
     end
 
     assign ResultW = ResultW_R;
-    assign RD_W = RD_W_R;
+    assign RD_W_W = RD_W_R;
     assign RegWriteW = RegWriteW_W;
 
 endmodule //writeback_cycle
