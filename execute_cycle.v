@@ -5,21 +5,21 @@
 module execute_cycle(
     input clk, rst,
     input [31:0] RD1_E, RD2_E, RD_E, PCE, PCPlus4E, Imm_Ext_E,
-    input RegWriteE, ALUSrcE, MemWriteE, BranchE,
-    input ResultSrcE,
+    input RegWriteE, ALUSrcE, MemWriteE, BranchE, JumpE,
+    input [1:0] ResultSrcE,
     input [2:0] ALUControlE,
 
     output [31:0] ALUResultM, WriteDataM, PCTargetE, PCPlus4M,
     output [4:0] RD_M,
     output RegWriteM, MemWriteM, PCSrcE,
-    output  ResultSrcM
+    output [1:0] ResultSrcM
 );
 
     // Intermediate registers
     reg [31:0] ALUResultE_R, WriteDataE_R, PCPlus4E_R;
     reg [4:0] RD_E_R;
     reg RegWriteE_R, MemWriteE_R;
-    reg ResultSrcE_R;
+    reg [1:0] ResultSrcE_R;
 
     // Intermediate wires
     wire [31:0] SrcAE, SrcBE, WriteDataE, ResultE;
@@ -76,7 +76,7 @@ module execute_cycle(
     // Combinational logic for other outputs
     assign SrcAE = RD1_E;
     assign WriteDataE = RD2_E;
-    assign PCSrcE = ZeroE & BranchE;
+    assign PCSrcE = (ZeroE & BranchE) | JumpE;
 
     assign RD_M = RD_E_R;
     assign RegWriteM = RegWriteE_R;

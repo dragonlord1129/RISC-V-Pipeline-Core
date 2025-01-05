@@ -1,25 +1,30 @@
 `include "control_unit.v"
 `include "registerFile.v"
 `include "sign_extend.v"
-module decode_cycle (clk, rst,  InstrD, PCD, PCPlus4D, RegWriteW, RDW, ResultW,  RegWriteE, ALUSrcE, MemWriteE, ResultSrcE, BranchE,  ALUControlE, RD1_E, RD2_E, Imm_Ext_E, RD_E, PCE, PCPlus4E, RS1_E, RS2_E);
+`include "alu_decoder.v"
+`include "main_decoder.v"
+module decode_cycle (clk, rst,  InstrD, PCD, PCPlus4D, RegWriteW, RDW, ResultW,  RegWriteE, ALUSrcE, MemWriteE, JumpE, ResultSrcE, BranchE,  ALUControlE, RD1_E, RD2_E, Imm_Ext_E, RD_E, PCE, PCPlus4E, RS1_E, RS2_E);
 
     input clk, rst;
     input [4:0] RDW;
     input [31:0] InstrD, PCD, PCPlus4D, ResultW;
     input RegWriteW;
 
-    output RegWriteE,ALUSrcE,MemWriteE,ResultSrcE,BranchE;
+    output RegWriteE,ALUSrcE,MemWriteE, BranchE, JumpE;
+    output [1:0] ResultSrcE;
     output [2:0] ALUControlE;
     output [31:0] RD1_E, RD2_E, Imm_Ext_E;
     output [4:0] RS1_E, RS2_E, RD_E;
     output [31:0] PCE, PCPlus4E;
 
-    wire RegWriteD, ALUSrcD, MemWriteD, ResultSrcD, BranchD;
+    wire RegWriteD, ALUSrcD, MemWriteD, BranchD, JumpD;
+    wire [1:0] ResultSrcD;
     wire [1:0] ImmSrcD;
     wire [2:0] ALUControlD;
     wire [31:0] readData1_D, readData2_D, Imm_Ext_D;
 
-    reg RegWriteD_R, ALUSrcD_R, MemWriteD_R, BranchD_R, ResultSrcD_R;
+    reg RegWriteD_R, ALUSrcD_R, MemWriteD_R, BranchD_R, JumpD_R;
+    reg [1:0] ResultSrcD_R;
     reg [2:0] ALUControlD_R;
     reg [31:0] readData1_D_R, readData2_D_R, Imm_Ext_D_R;
     reg [4:0] RD_D_R, RS1_D_R, RS2_D_R;
@@ -34,6 +39,7 @@ module decode_cycle (clk, rst,  InstrD, PCD, PCPlus4D, RegWriteW, RDW, ResultW, 
         .MemWrite(MemWriteD),
         .ResultSrc(ResultSrcD),
         .Branch(BranchD),
+        .Jump(JumpD),
         .funct3(InstrD[14:12]),
         .funct7(InstrD[31:25]),
         .ALUControl(ALUControlD)
@@ -60,8 +66,9 @@ module decode_cycle (clk, rst,  InstrD, PCD, PCPlus4D, RegWriteW, RDW, ResultW, 
             RegWriteD_R <= 1'b0;
             ALUSrcD_R <= 1'b0;
             MemWriteD_R <= 1'b0;
-            ResultSrcD_R <= 1'b0;
+            ResultSrcD_R <= 2'b00;
             BranchD_R <= 1'b0;
+            JumpD_R <= 1'b0;
             ALUControlD_R <= 3'b000;
             readData1_D_R <= 32'h00000000; 
             readData2_D_R <= 32'h00000000; 
@@ -78,6 +85,7 @@ module decode_cycle (clk, rst,  InstrD, PCD, PCPlus4D, RegWriteW, RDW, ResultW, 
             MemWriteD_R <= MemWriteD;
             ResultSrcD_R <= ResultSrcD;
             BranchD_R <= BranchD;
+            JumpD_R <= JumpD;
             ALUControlD_R <= ALUControlD;
             RD1_D_R <= RD1_D; 
             RD2_D_R <= RD2_D; 
@@ -96,6 +104,7 @@ module decode_cycle (clk, rst,  InstrD, PCD, PCPlus4D, RegWriteW, RDW, ResultW, 
     assign MemWriteE = MemWriteD_R;
     assign ResultSrcE = ResultSrcD_R;
     assign BranchE = BranchD_R;
+    assign JumpE = JumpD_R;
     assign ALUControlE = ALUControlD_R;
     assign RD1_E = RD1_D_R;
     assign RD2_E = RD2_D_R;

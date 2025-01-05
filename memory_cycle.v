@@ -5,17 +5,17 @@ RegWriteW, ResultSrcW, ALUResultW, ReadDataW, RD_W, PCPlus4W
 
     input clk, rst;
     input RegWriteM, MemWriteM;
-    input ResultSrcM;
+    input [1:0] ResultSrcM;
     input [31:0] ALUResultM, WriteDataM, PCPlus4M;
     input [4:0] RD_M;
     
     output RegWriteW;
-    output ResultSrcW;
+    output [1:0] ResultSrcW;
     output [31:0] ALUResultW, ReadDataW, PCPlus4W;
     output [4:0] RD_W;
 
     reg RegWriteM_R;
-    reg ResultSrcM_R;
+    reg [1:0] ResultSrcM_R;
     reg [31:0] ALUResultM_R, ReadDataM_R, PCPlus4M_R;
     reg [4:0] RD_M_R;
 

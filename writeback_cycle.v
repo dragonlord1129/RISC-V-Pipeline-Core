@@ -1,7 +1,8 @@
 `include "mux.v"
 module writeback_cycle (clk, rst, RegWriteW, ResultSrcW, ALUResultW, ReadDataW, RD_W, RD_W_W,
 ResultW, RegWriteW_W);
-    input clk, rst, RegWriteW, ResultSrcW;
+    input clk, rst, RegWriteW, 
+    input [1:0] ResultSrcW;
     input [4:0] RD_W;
     input [31:0] ALUResultW, ReadDataW;
 
