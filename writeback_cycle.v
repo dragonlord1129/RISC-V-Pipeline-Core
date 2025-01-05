@@ -1,10 +1,10 @@
 `include "mux.v"
-module writeback_cycle (clk, rst, RegWriteW, ResultSrcW, ALUResultW, ReadDataW, RD_W, RD_W_W,
+module writeback_cycle (clk, rst, RegWriteW, ResultSrcW, ALUResultW, ReadDataW, PCPlus4W, RD_W, RD_W_W,
 ResultW, RegWriteW_W);
-    input clk, rst, RegWriteW, 
+    input clk, rst, RegWriteW;
     input [1:0] ResultSrcW;
     input [4:0] RD_W;
-    input [31:0] ALUResultW, ReadDataW;
+    input [31:0] ALUResultW, ReadDataW, PCPlus4W;
 
     output [31:0] ResultW; 
     output RegWriteW_W;
@@ -16,11 +16,12 @@ ResultW, RegWriteW_W);
 
     wire [31:0] ResultW_X;
     
-    mux mux(
+    mux_3_by_1 mux_3_by_1(
         .a(ALUResultW),
         .b(ReadDataW),
+        .c(PCPlus4W),
         .s(ResultSrcW),
-        .c(ResultW_X)
+        .d(ResultW)
     );
 
     always @(posedge clk or negedge rst) begin
