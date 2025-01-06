@@ -8,11 +8,15 @@ module execute_cycle(
     input RegWriteE, ALUSrcE, MemWriteE, BranchE, JumpE,
     input [1:0] ResultSrcE,
     input [2:0] ALUControlE,
+    input [4:0] RS1_E, RS2_E,
+    input [1:0] ForwardAE, ForwardBE,
+    input [31:0] ResultW, ALUResultM,
 
     output [31:0] ALUResultM, WriteDataM, PCTargetE, PCPlus4M,
     output [4:0] RD_M,
     output RegWriteM, MemWriteM, PCSrcE,
-    output [1:0] ResultSrcM
+    output [1:0] ResultSrcM,
+    output [4:0] RS1_E_H, RS2_E_H
 );
 
     // Intermediate registers
@@ -22,12 +26,26 @@ module execute_cycle(
     reg [1:0] ResultSrcE_R;
 
     // Intermediate wires
-    wire [31:0] SrcAE, SrcBE, WriteDataE, ResultE;
+    wire [31:0] SrcAE, SrcBE, WriteDataE, ResultE, SrcBE_M;
     wire ZeroE;
 
+    mux_3_by_1 SrcAEMux(
+        .a(RD1_E),
+        .b(ResultW),
+        .c(ALUResultM),
+        .s(ForwardAE),
+        .d(SrcAE)
+    );
+    mux_3_by_1 SrcBEMux(
+        .a(RD2_E),
+        .b(ResultW),
+        .c(ALUResultM),
+        .s(ForwardBE),
+        .d(SrcBE_M)
+     );
     // Multiplexer to select ALU B input
     mux mux_1(
-        .a(RD2_E),
+        .a(SrcBE_M),
         .b(Imm_Ext_E),
         .s(ALUSrcE),
         .c(SrcBE)
@@ -64,7 +82,7 @@ module execute_cycle(
             RD_E_R <= 5'd0;
         end else begin
             ALUResultE_R <= ResultE;
-            WriteDataE_R <= WriteDataE;
+            WriteDataE_R <= SrcBE_M;
             RegWriteE_R <= RegWriteE;
             MemWriteE_R <= MemWriteE;
             ResultSrcE_R <= ResultSrcE;
@@ -74,7 +92,7 @@ module execute_cycle(
     end
 
     // Combinational logic for other outputs
-    assign SrcAE = RD1_E;
+
     assign WriteDataE = RD2_E;
     assign PCSrcE = (ZeroE & BranchE) | JumpE;
 
@@ -85,5 +103,6 @@ module execute_cycle(
     assign PCPlus4M = PCPlus4E_R;
     assign MemWriteM = MemWriteE_R;
     assign WriteDataM = WriteDataE_R;
-
+    assign RS1_E_H = RS1_E;
+    assign RS2_E_H = RS2_E;
 endmodule

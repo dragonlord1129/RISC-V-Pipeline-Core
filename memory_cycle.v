@@ -52,6 +52,6 @@ RegWriteW, ResultSrcW, ALUResultW, ReadDataW, RD_W, PCPlus4W
     assign ResultSrcW = ResultSrcM_R;
     assign RD_W = RD_M_R;
     assign PCPlus4W = PCPlus4M_R;
-    assign ALU_ResultW = ALU_ResultM_R;
+    assign ALUResultW = ALUResultM_R;
     assign ReadDataW = ReadDataM_R;
 endmodule //memory_cycle
