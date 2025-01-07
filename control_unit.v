@@ -5,9 +5,10 @@ module control_unit (
     output [1:0] ImmSrc, ResultSrc,
     output [2:0] ALUControl
 );
-    wire [1:0] ALUOp;
+    wire [1:0] ALUOp; // Internal signal for ALUOp
 
-    main_decoder main_decoder(
+    // Main decoder instance
+    main_decoder main_decoder (
         .opcode(opcode),
         .RegWrite(RegWrite),
         .ImmSrc(ImmSrc),
@@ -16,10 +17,11 @@ module control_unit (
         .Branch(Branch),
         .Jump(Jump),
         .ALUSrc(ALUSrc),
-        .ALUOp(ALUOp)
+        .ALUOp(ALUOp) // Outputs ALUOp
     );
 
-    alu_decoder alu_decoder(
+    // ALU decoder instance
+    alu_decoder alu_decoder (
         .ALUOp(ALUOp),
         .funct3(funct3),
         .funct7(funct7),

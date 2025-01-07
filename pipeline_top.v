@@ -18,12 +18,13 @@
 `include "instruction_memory.v"
 
 module pipeline_top (clk, rst);
-    input clk, rst; 
+    input clk, rst;
 
-    wire PCSrcE, RegWriteW, RegWriteE, RegWriteM, RegWriteW, RegWriteW_W, ALUSrcE, MemWriteE, MemWriteM, BranchE;
+    // Declare all wires
+    wire PCSrcE, RegWriteW, RegWriteE, RegWriteM, RegWriteW_W, ALUSrcE, MemWriteE, MemWriteM, BranchE;
     wire [1:0] ResultSrcE, ResultSrcW, ResultSrcM, ForwardAE, ForwardBE;
-    wire [1:0] ALUControlE;
-    wire [4:0] RDW, RD_E, RD_M, RD_W, RD_W_W,  RS1_E, RS2_E, RS1_E_H, RS2_E_H;
+    wire [2:0] ALUControlE; // Fixed width to 3 bits
+    wire [4:0] RDW, RD_E, RD_M, RD_W, RD_W_W, RS1_E, RS2_E, RS1_E_H, RS2_E_H;
     wire [31:0] PCTargetE, InstrD, PCD, PCPlus4D, PCPlus4M, PCPlus4E, ResultW, RD1_E, RD2_E, Imm_Ext_E, PCE;
     wire [31:0] ALUResultM, WriteDataM, PCPlus4W, ReadDataW, ALUResultW;
 
@@ -82,6 +83,7 @@ module pipeline_top (clk, rst);
         .ForwardBE(ForwardBE),
         .PCPlus4E(PCPlus4E),
         .ResultW(ResultW),
+        .ALUResultM_E(ALUResultW),
         .ALUResultM(ALUResultM), 
         .WriteDataM(WriteDataM), 
         .PCTargetE(PCTargetE), 
@@ -114,7 +116,7 @@ module pipeline_top (clk, rst);
     );
 
     writeback_cycle writeback(
-        .clk(clkWriteDataM), 
+        .clk(clk), 
         .rst(rst), 
         .RegWriteW(RegWriteW), 
         .ResultSrcW(ResultSrcW), 
@@ -138,4 +140,4 @@ module pipeline_top (clk, rst);
         .RD_W_W(RD_W_W)
     );
 
-endmodule //pipeline_top
+endmodule // pipeline_top

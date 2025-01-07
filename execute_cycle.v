@@ -1,12 +1,12 @@
 module execute_cycle(
     input clk, rst,
-    input [31:0] RD1_E, RD2_E, RD_E, PCE, PCPlus4E, Imm_Ext_E,
+    input [31:0] RD1_E, RD2_E, PCE, PCPlus4E, Imm_Ext_E,
     input RegWriteE, ALUSrcE, MemWriteE, BranchE, JumpE,
     input [1:0] ResultSrcE,
     input [2:0] ALUControlE,
-    input [4:0] RS1_E, RS2_E,
+    input [4:0] RS1_E, RS2_E, RD_E,
     input [1:0] ForwardAE, ForwardBE,
-    input [31:0] ResultW, ALUResultM,
+    input [31:0] ResultW, ALUResultM_E,
 
     output [31:0] ALUResultM, WriteDataM, PCTargetE, PCPlus4M,
     output [4:0] RD_M,
@@ -28,14 +28,14 @@ module execute_cycle(
     mux_3_by_1 SrcAEMux(
         .a(RD1_E),
         .b(ResultW),
-        .c(ALUResultM),
+        .c(ALUResultM_E),
         .s(ForwardAE),
         .d(SrcAE)
     );
     mux_3_by_1 SrcBEMux(
         .a(RD2_E),
         .b(ResultW),
-        .c(ALUResultM),
+        .c(ALUResultM_E),
         .s(ForwardBE),
         .d(SrcBE_M)
      );

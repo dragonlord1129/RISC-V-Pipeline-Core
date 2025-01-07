@@ -1,5 +1,7 @@
-module writeback_cycle (clk, rst, RegWriteW, ResultSrcW, ALUResultW, ReadDataW, PCPlus4W, RD_W, RD_W_W,
-ResultW, RegWriteW_W);
+module writeback_cycle (
+    clk, rst, RegWriteW, ResultSrcW, ALUResultW, ReadDataW, PCPlus4W, RD_W, RD_W_W,
+    ResultW, RegWriteW_W
+);
     input clk, rst, RegWriteW;
     input [1:0] ResultSrcW;
     input [4:0] RD_W;
@@ -15,28 +17,30 @@ ResultW, RegWriteW_W);
 
     wire [31:0] ResultW_X;
     
+    // Multiplexer instantiation
     mux_3_by_1 mux_3_by_1(
         .a(ALUResultW),
         .b(ReadDataW),
         .c(PCPlus4W),
         .s(ResultSrcW),
-        .d(ResultW)
+        .d(ResultW_X)  // Use intermediate wire
     );
 
     always @(posedge clk or negedge rst) begin
-        if(rst == 1'b0) begin
+        if (rst == 1'b0) begin
             ResultW_R <= 32'd0;
             RD_W_R <= 5'd0;
-            RegWriteW_R = 1'b0;
+            RegWriteW_R <= 1'b0;  // Use non-blocking assignment
         end else begin
             ResultW_R <= ResultW_X;
             RD_W_R <= RD_W;
-            RegWriteW_R = RegWriteW;
+            RegWriteW_R <= RegWriteW;
         end
     end
 
+    // Assign outputs
     assign ResultW = ResultW_R;
     assign RD_W_W = RD_W_R;
-    assign RegWriteW = RegWriteW_W;
+    assign RegWriteW_W = RegWriteW_R;
 
-endmodule //writeback_cycle
+endmodule // writeback_cycle
