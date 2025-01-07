@@ -1,4 +1,3 @@
-`include "mux.v"
 module writeback_cycle (clk, rst, RegWriteW, ResultSrcW, ALUResultW, ReadDataW, PCPlus4W, RD_W, RD_W_W,
 ResultW, RegWriteW_W);
     input clk, rst, RegWriteW;

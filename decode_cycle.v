@@ -1,8 +1,3 @@
-`include "control_unit.v"
-`include "registerFile.v"
-`include "sign_extend.v"
-`include "alu_decoder.v"
-`include "main_decoder.v"
 module decode_cycle (clk, rst,  InstrD, PCD, PCPlus4D, RegWriteW, RDW, ResultW,  RegWriteE, ALUSrcE, MemWriteE, JumpE, ResultSrcE, BranchE,  ALUControlE, RD1_E, RD2_E, Imm_Ext_E, RD_E, PCE, PCPlus4E, RS1_E, RS2_E);
 
     input clk, rst;

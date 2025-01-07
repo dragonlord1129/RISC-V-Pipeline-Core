@@ -1,7 +1,3 @@
-`include "alu.v"
-`include "mux.v"
-`include "pc_adder.v"
-
 module execute_cycle(
     input clk, rst,
     input [31:0] RD1_E, RD2_E, RD_E, PCE, PCPlus4E, Imm_Ext_E,

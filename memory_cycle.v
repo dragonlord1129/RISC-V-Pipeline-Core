@@ -1,4 +1,3 @@
-`include "data_memory.v"
 module memory_cycle (clk, rst, RegWriteM, ResultSrcM, MemWriteM, ALUResultM, WriteDataM, RD_M, PCPlus4M,
 RegWriteW, ResultSrcW, ALUResultW, ReadDataW, RD_W, PCPlus4W
 );

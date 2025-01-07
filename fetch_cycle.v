@@ -1,8 +1,3 @@
-`include "mux.v"
-`include "pc_adder.v"
-`include "PC.v"
-`include "instruction_memory.v"
-
 module fetch_cycle (clk, rst, PCSrcE, PCTargetE, InstrD, PCD, PCPlus4D);
     //inputs and output declaration
     input clk, rst;
