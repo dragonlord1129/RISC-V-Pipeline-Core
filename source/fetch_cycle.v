@@ -52,7 +52,7 @@ module fetch_cycle (clk, rst, PCSrcE, PCTargetE, InstrD, PCD, PCPlus4D);
 
 
     // Assigning Registers Value to the Output port
-    assign  InstrD =  InstrF_reg;
-    assign  PCD =  PCF_reg;
-    assign  PCPlus4D =  PCPlus4F_reg;
+    assign  InstrD = (rst == 1'b0) ? 32'h00000000 : InstrF_reg;
+    assign  PCD = (rst == 1'b0) ? 32'h00000000 : PCF_reg;
+    assign  PCPlus4D = (rst == 1'b0) ? 32'h00000000 : PCPlus4F_reg;
 endmodule //fetch cycle

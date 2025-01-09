@@ -19,7 +19,7 @@ module main_decoder (
     assign ALUSrc = ((opcode == lw) | (opcode == sw) | (opcode == jalr)) ? 1'b1 : 1'b0;
     assign Branch = (opcode == beq) ? 1'b1 : 1'b0;
 
-    assign JumpD = ((opcode == jal) | (opcode == jalr)) ? 1'b1 : 1'b0;
+    assign Jump = ((opcode == jal) | (opcode == jalr)) ? 1'b1 : 1'b0;
 
     assign ImmSrc = (opcode == sw) ? 2'b01 :   // S-type immediate
                     (opcode == beq) ? 2'b10 :  // B-type immediate
@@ -32,6 +32,6 @@ module main_decoder (
                    2'b00;                                     // Default
 
     assign ResultSrc = (opcode == lw) ? 2'b01 :  // Memory result
-                       (opcode == jal) ? 2'b11 : // PC+4 (Jump link)
+                       ((opcode == jal) | (opcode == jalr)) ? 2'b11 : // PC+4 (Jump link)
                        2'b00;                    // Default (ALU result)
 endmodule
