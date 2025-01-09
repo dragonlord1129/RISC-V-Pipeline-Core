@@ -1,7 +1,10 @@
+// ============================
+// Main Decoder Module
+// ============================
 module main_decoder (
-    input [6:0] opcode,
-    output RegWrite, MemWrite, ALUSrc, Branch, Jump,
-    output [1:0] ImmSrc, ResultSrc, ALUOp
+    input [6:0] opcode,          // Opcode from instruction
+    output RegWrite, MemWrite, ALUSrc, Branch, Jump, // Control signals
+    output [1:0] ImmSrc, ResultSrc, ALUOp // Immediate, result source, and ALU operation
 );
     parameter lw = 7'b0000011;     // Load word
     parameter sw = 7'b0100011;     // Store word
@@ -10,6 +13,7 @@ module main_decoder (
     parameter jal = 7'b1101111;    // Jump and link
     parameter jalr = 7'b1100111;   // Jump and link register
 
+    // Control signal assignments based on opcode
     assign RegWrite = ((opcode == lw) | (opcode == R_type) | (opcode == jal) | (opcode == jalr)) ? 1'b1 : 1'b0;
     assign MemWrite = (opcode == sw) ? 1'b1 : 1'b0;
     assign ALUSrc = ((opcode == lw) | (opcode == sw) | (opcode == jalr)) ? 1'b1 : 1'b0;
