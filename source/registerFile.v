@@ -13,8 +13,8 @@ module registerFile (
     assign readData1 = (rst==1'b0) ? x[rs1] : 32'h00000000;
     assign readData2 = (rst==1'b0) ? x[rs2] : 32'h00000000;
 
-    always @(posedge clk) begin
-        if (~rst && writeEnable)
+    always @(posedge clk or negedge rst) begin
+        if ((rst == 1) && writeEnable)
             x[rd] <= writeData;
     end
      initial begin

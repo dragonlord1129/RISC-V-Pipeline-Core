@@ -18,7 +18,7 @@ module execute_cycle(
     // Intermediate registers
     reg [31:0] ALUResultE_R, WriteDataE_R, PCPlus4E_R;
     reg [4:0] RD_E_R;
-    reg RegWriteE_R, MemWriteE_R;
+    reg RegWriteE_R, MemWriteE_R, PCSrcE_R;
     reg [1:0] ResultSrcE_R;
 
     // Intermediate wires
@@ -72,6 +72,7 @@ module execute_cycle(
             ALUResultE_R <= 32'd0;
             WriteDataE_R <= 32'd0;
             RegWriteE_R <= 1'b0;
+            PCSrcE_R <= 1'b0;
             MemWriteE_R <= 1'b0;
             ResultSrcE_R <= 2'b00;
             PCPlus4E_R <= 32'd0;
@@ -80,6 +81,7 @@ module execute_cycle(
             ALUResultE_R <= ResultE;
             WriteDataE_R <= SrcBE_M;
             RegWriteE_R <= RegWriteE;
+            PCSrcE_R <= (ZeroE & BranchE) | JumpE;
             MemWriteE_R <= MemWriteE;
             ResultSrcE_R <= ResultSrcE;
             PCPlus4E_R <= PCPlus4E;
@@ -89,8 +91,8 @@ module execute_cycle(
 
     // Combinational logic for other outputs
 
-    assign WriteDataE = RD2_E;
-    assign PCSrcE = (ZeroE & BranchE) | JumpE;
+    assign WriteDataE = WriteDataE_R;
+    assign PCSrcE = PCSrcE_R;
 
     assign RD_M = RD_E_R;
     assign RegWriteM = RegWriteE_R;
