@@ -10,8 +10,8 @@ module registerFile (
 );
     reg [31:0] x [31:0];        // Register array
 
-    assign readData1 = (rst==1'b0) ? x[rs1] : 32'h00000000;
-    assign readData2 = (rst==1'b0) ? x[rs2] : 32'h00000000;
+    assign readData1 = (rst==1'b1) ? x[rs1] : 32'h00000000;
+    assign readData2 = (rst==1'b1) ? x[rs2] : 32'h00000000;
 
     always @(posedge clk or negedge rst) begin
         if ((rst == 1) && writeEnable)
