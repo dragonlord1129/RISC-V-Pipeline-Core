@@ -52,7 +52,7 @@ module decode_cycle (
         .writeEnable(RegWriteW), // WE#
         .rs1(InstrD[19:15]),    // A1
         .rs2(InstrD[24:20]),    // A2
-        .rd(RDW),               // a#
+        .rd(RDW),               // A3
         .writeData(ResultW),    // WD3
         .readData1(readData1_D),// RD1
         .readData2(readData2_D) // RD2

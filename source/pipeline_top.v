@@ -46,7 +46,7 @@ module pipeline_top (clk, rst);
         .PCD(PCD), 
         .PCPlus4D(PCPlus4D), 
         .RegWriteW(RegWriteW), 
-        .RDW(RDW), 
+        .RDW(RD_W), 
         .ResultW(ResultW), 
         .RegWriteE(RegWriteE), 
         .ALUSrcE(ALUSrcE), 
@@ -88,7 +88,7 @@ module pipeline_top (clk, rst);
         .PCTargetE(PCTargetE), 
         .PCSrcE(PCSrcE),
         .ALUResultM(ALUResultM),
-        .ALUResultM_E(ALUResultM_E), 
+        .ALUResultM_E(ALUResultM), 
         .WriteDataM(WriteDataM),
         .PCE(PCE),
         .PCPlus4E(PCPlus4E),
@@ -108,7 +108,7 @@ module pipeline_top (clk, rst);
         .RegWriteW(RegWriteW),
         .ResultSrcM(ResultSrcM),
         .ResultSrcW(ResultSrcW),
-        .ALUResultM(ALUResultM), 
+        .ALUResultM(ALUResultM),
         .ALUResultW(ALUResultW),
         .WriteDataM(WriteDataM), 
         .ReadDataW(ReadDataW),
@@ -127,21 +127,19 @@ module pipeline_top (clk, rst);
         .ALUResultW(ALUResultW),
         .PCPlus4W(PCPlus4W),
         .RD_W(RD_W),
-        .ResultSrcW(ResultSrcW),
-        .RegWriteW_W(RegWriteW_W),
-        .RD_W_W(RD_W_W)
+        .ResultSrcW(ResultSrcW)
     );
 
     hazard_unit hazard (
         .rst(rst),
-        .RS1_E(RS1_E), 
-        .RS2_E(RS2_E), 
+        .RS1_E(RS1_E_H), 
+        .RS2_E(RS2_E_H), 
         .ForwardAE(ForwardAE), 
         .ForwardBE(ForwardBE), 
         .RD_M(RD_M), 
-        .RegWriteW_W(RegWriteW_W),
+        .RegWriteW(RegWriteW),
         .RegWriteM(RegWriteM),
-        .RD_W_W(RD_W_W)
+        .RD_W(RD_W)
     );
 
 endmodule // pipeline_top

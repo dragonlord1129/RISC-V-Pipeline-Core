@@ -14,4 +14,10 @@ module data_memory (
         if (writeEnable)
             data_memory[A] <= writeData;
     end
+    integer i;
+    initial begin
+        for(i =0; i<1023; i++) begin
+            data_memory[i] <= 32'd0;
+        end
+    end
 endmodule

@@ -12,11 +12,12 @@ module main_decoder (
     parameter beq = 7'b1100011;    // Branch equal
     parameter jal = 7'b1101111;    // Jump and link
     parameter jalr = 7'b1100111;   // Jump and link register
+    parameter imm = 7'b0010011; // immediate instructions
 
     // Control signal assignments based on opcode
-    assign RegWrite = ((opcode == lw) | (opcode == R_type) | (opcode == jal) | (opcode == jalr)) ? 1'b1 : 1'b0;
+    assign RegWrite = ((opcode == lw) | (opcode == R_type) | (opcode == jal) | (opcode == jalr) | (opcode == imm)) ? 1'b1 : 1'b0;
     assign MemWrite = (opcode == sw) ? 1'b1 : 1'b0;
-    assign ALUSrc = ((opcode == lw) | (opcode == sw) | (opcode == jalr)) ? 1'b1 : 1'b0;
+    assign ALUSrc = ((opcode == lw) | (opcode == sw) | (opcode == jalr) | (opcode == imm)) ? 1'b1 : 1'b0;
     assign Branch = (opcode == beq) ? 1'b1 : 1'b0;
 
     assign Jump = ((opcode == jal) | (opcode == jalr)) ? 1'b1 : 1'b0;

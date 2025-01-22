@@ -40,7 +40,7 @@ module execute_cycle(
         .d(SrcBE_M)
      );
     // Multiplexer to select ALU B input
-    mux mux_1(
+    mux alu_mux(
         .a(SrcBE_M),
         .b(Imm_Ext_E),
         .s(ALUSrcE),

@@ -17,14 +17,8 @@ module alu #(
     wire [WIDTH-1:0] slt;                            // Set Less Than result
     wire cout;                                       // Carry-out flag
 
-    // Logic for ALU operations
-    assign A_and_B = A & B;
-    assign A_or_B = A | B;
-    assign A_xor_B = A ^ B;
-    assign not_B = ~B;
-
     // Addition/Subtraction based on ALUControl
-    assign mux_1 = (ALUControl[0] == 1'b1) ? not_B : B;
+    assign mux_1 = (ALUControl[0] == 1'b1) ? ~B : B;
     assign {cout, sum} = A + mux_1 + ALUControl[0];
 
     // Set Less Than operation
@@ -33,8 +27,8 @@ module alu #(
     // Multiplexer for ALU operation selection
     assign mux_2 = (ALUControl[2:0] == 3'b000) ? sum :
                    (ALUControl[2:0] == 3'b001) ? sum :
-                   (ALUControl[2:0] == 3'b010) ? A_and_B : 
-                   (ALUControl[2:0] == 3'b011) ? A_or_B :
+                   (ALUControl[2:0] == 3'b010) ? A & B : 
+                   (ALUControl[2:0] == 3'b011) ? A | B :
                    (ALUControl[2:0] == 3'b101) ? slt : {WIDTH{1'b0}};
 
     assign result = mux_2;
