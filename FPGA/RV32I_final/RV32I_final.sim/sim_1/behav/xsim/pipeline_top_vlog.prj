@@ -1,0 +1,26 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  \
+"../../../../RV32I_final.srcs/sources_1/imports/source/PC.v" \
+"../../../../RV32I_final.srcs/sources_1/imports/source/alu.v" \
+"../../../../RV32I_final.srcs/sources_1/imports/source/alu_decoder.v" \
+"../../../../RV32I_final.srcs/sources_1/imports/source/control_unit.v" \
+"../../../../RV32I_final.srcs/sources_1/imports/source/data_memory.v" \
+"../../../../RV32I_final.srcs/sources_1/imports/source/decode_cycle.v" \
+"../../../../RV32I_final.srcs/sources_1/imports/source/execute_cycle.v" \
+"../../../../RV32I_final.srcs/sources_1/imports/source/fetch_cycle.v" \
+"../../../../RV32I_final.srcs/sources_1/imports/source/hazard_unit.v" \
+"../../../../RV32I_final.srcs/sources_1/imports/source/instruction_memory.v" \
+"../../../../RV32I_final.srcs/sources_1/imports/source/main_decoder.v" \
+"../../../../RV32I_final.srcs/sources_1/imports/source/memory_cycle.v" \
+"../../../../RV32I_final.srcs/sources_1/imports/source/mux.v" \
+"../../../../RV32I_final.srcs/sources_1/imports/source/pc_adder.v" \
+"../../../../RV32I_final.srcs/sources_1/imports/source/registerFile.v" \
+"../../../../RV32I_final.srcs/sources_1/imports/source/sign_extend.v" \
+"../../../../RV32I_final.srcs/sources_1/imports/source/writeback_cycle.v" \
+"../../../../RV32I_final.srcs/sources_1/imports/source/pipeline_top.v" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

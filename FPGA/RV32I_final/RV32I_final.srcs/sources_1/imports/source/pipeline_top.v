@@ -17,9 +17,10 @@
 `include "PC.v"
 `include "instruction_memory.v"
 
-module pipeline_top (clk, rst, Result);
-    input clk, rst;
-    output [31:0] Result;
+
+module pipeline_top (clk, rst, next, Result);
+    input clk, rst, next;
+    output [3:0] Result;
 
     // Internal wire declarations
     wire PCSrcE, RegWriteW, RegWriteE, RegWriteM, ALUSrcE, MemWriteE, MemWriteM, BranchE, JumpE;
@@ -142,6 +143,14 @@ module pipeline_top (clk, rst, Result);
         .RegWriteM(RegWriteM),
         .RD_W(RD_W)
     );
-    assign Result = (rst == 1'b0) ? 32'd0 : ResultW;
-
+    wire [31:0] done;
+    assign done = (rst) ? ResultW[31:0] : 32'd0;
+    reg flag;
+    always @(posedge clk or negedge rst) begin
+        if(rst == 1'b0) flag <= 1'b0;
+        else if(rst == 1'b1 && done == 32'd8) flag = 1'b1;
+    end
+    
+assign Result = ((flag) & (next)) ? 4'd15:
+                ((flag) & (~next))? (4'd8 & ResultW[3:0]) : 4'd0;
 endmodule // pipeline_top

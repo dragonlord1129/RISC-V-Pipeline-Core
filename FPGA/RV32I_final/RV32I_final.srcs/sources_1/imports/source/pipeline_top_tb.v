@@ -3,7 +3,8 @@
 module pipeline_top_tb;
 
     reg clk=0, rst;
-    wire [31:0] Result;
+    
+    wire [3:0] Result;
     
     always begin
         clk = ~clk;
