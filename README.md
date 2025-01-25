@@ -43,7 +43,7 @@ The Fetch Cycle Datapath consists of the following modules:
 4. Instruction Memory
 5. Fetch Stage Registers
 
-[Fetch Cycle Datapath](./pic/Fetch%20Cycle.png)
+[Fetch Cycle Datapath](./pic/Fetch_Cycle.png)
 
 
 ---
