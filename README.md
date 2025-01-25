@@ -69,7 +69,7 @@ The Execute Cycle Datapath consists of the following modules:
 4. ALU
 5. Execute Stage Registers
 
-![Execute Cycle Datapath](./pic/Execute_Cycle.png)
+![Execute Cycle Datapath](./pic/Execute_cycle.png)
 
 ---
 
