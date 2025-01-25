@@ -121,8 +121,8 @@ The Hazard Unit is implemented based on the following condition table:
 
 | Stage           | Condition                                           | ForwardAE | ForwardBE |
 |------------------|-----------------------------------------------------|-----------|-----------|
-| Memory Stage    | RegWriteM and (RdM != 0) and (RdM == Rs1E)          | 10        |           |
-| Write Back Stage| RegWriteW and (RdW != 0) and (RdW == Rs1E)          | 01        |           |
+| Memory Stage    | RegWriteM and (RdM != 0) and (RdM == Rs1E)          | 10        | 10        |
+| Write Back Stage| RegWriteW and (RdW != 0) and (RdW == Rs1E)          | 01        | 01        |
 
 ---
 
