@@ -128,7 +128,7 @@ The Hazard Unit is implemented based on the following condition table:
 
 ## Pipeline Top Architecture
 
-![Updated Pipeline Top Architecture](./pic/Pipleline_Top.png)
+![Updated Pipeline Top Architecture](./pic/Pipeline_Top.png)
 
 ---
 ### Observed Waveform
