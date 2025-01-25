@@ -43,7 +43,7 @@ The Fetch Cycle Datapath consists of the following modules:
 4. Instruction Memory
 5. Fetch Stage Registers
 
-[Fetch Cycle Datapath](./home/dragonlord/verilog/RISC-V/Pipeline%20Core/pic/Fetch%20Cycle.png)
+[Fetch Cycle Datapath](./pic/Fetch%20Cycle.png)
 
 
 ---
@@ -56,7 +56,7 @@ The Decode Cycle Datapath consists of the following modules:
 3. Extender
 4. Decode Stage Registers
 
-![Decode Cycle Datapath](./home/dragonlord/verilog/RISC-V/Pipeline%20Core/pic/Decode_Cycle.png)
+![Decode Cycle Datapath](./pic/Decode_Cycle.png)
 
 ---
 
@@ -69,7 +69,7 @@ The Execute Cycle Datapath consists of the following modules:
 4. ALU
 5. Execute Stage Registers
 
-![Execute Cycle Datapath](./home/dragonlord/verilog/RISC-V/Pipeline%20Core/pic/Execute_Cycle.png)
+![Execute Cycle Datapath](./pic/Execute_Cycle.png)
 
 ---
 
@@ -79,7 +79,7 @@ The Memory Cycle Datapath consists of the following modules:
 1. Data Memory
 2. Memory Stage Registers
 
-![Memory Cycle Datapath](./home/dragonlord/verilog/RISC-V/Pipeline%20Core/pic/Memory_Cycle.png)
+![Memory Cycle Datapath](./pic/Memory_Cycle.png)
 
 ---
 
@@ -88,7 +88,7 @@ The Memory Cycle Datapath consists of the following modules:
 The Write Back Cycle Datapath includes:
 1. Mux
 
-![Write Back Cycle Datapath](./home/dragonlord/verilog/RISC-V/Pipeline%20Core/pic/Writeback_Cycle.png)
+![Write Back Cycle Datapath](./pic/Writeback_Cycle.png)
 
 ---
 
@@ -108,10 +108,10 @@ Data Hazards occur when data to be executed is not available. Examples:
   - Forwarding/Bypassing
 
 #### Using NOPs
-![Data Hazard with NOPs](./home/dragonlord/verilog/RISC-V/Pipeline%20Core/pic/Data_Hazard_NOP.png)
+![Data Hazard with NOPs](./pic/Data_Hazard_NOP.png)
 
 #### Using Forwarding/Bypassing
-![Data Hazard with Forwarding](./home/dragonlord/verilog/RISC-V/Pipeline%20Core/pic/Data_Hazard_FWD.png)
+![Data Hazard with Forwarding](./pic/Data_Hazard_FWD.png)
 
 ---
 
@@ -128,11 +128,11 @@ The Hazard Unit is implemented based on the following condition table:
 
 ## Pipeline Top Architecture
 
-![Updated Pipeline Top Architecture](./home/dragonlord/verilog/RISC-V/Pipeline%20Core/pic/Pipleline_Top.png)
+![Updated Pipeline Top Architecture](./pic/Pipleline_Top.png)
 
 ---
 ### Observed Waveform
-![Waveform](./home/dragonlord/verilog/RISC-V/Pipeline%20Core/pic/Waveform.png)
+![Waveform](./pic/Waveform.png)
 
 ---
 ## Thank You
